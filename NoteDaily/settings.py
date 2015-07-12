@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
 from mongoengine import connect
+import mongoengine
 
 # Connect to mongodb
 connect('note', host='www.notech.work', port=20000)
@@ -40,7 +41,6 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'note',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -57,7 +57,7 @@ MIDDLEWARE_CLASSES = (
 ROOT_URLCONF = 'NoteDaily.urls'
 
 TEMPLATE_DIRS = (
-    os.path.join(BASE_DIR,  'templates'),
+    os.path.join(BASE_DIR, 'templates'),
 )
 
 TEMPLATES = [
@@ -79,11 +79,10 @@ TEMPLATES = [
 WSGI_APPLICATION = 'NoteDaily.wsgi.application'
 
 
-# Database
-# https://docs.djangoproject.com/en/1.8/ref/settings/#databases
-
 DATABASES = {
     'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
 
@@ -105,4 +104,3 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
 STATIC_URL = '/static/'
-

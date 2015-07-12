@@ -1,18 +1,42 @@
-from django.shortcuts import render_to_response
+from django.shortcuts import *
 from django.template import RequestContext
+from functools import wraps
 from bson import ObjectId
 
 from note.models import *
 
 
-def index(request):
-    users = User.objects
-    params = {"users" : users}
-    return render_to_response('index.html', params, context_instance=RequestContext(request))
+def authentication(func):
+    @wraps(func)
+    def wrapper(request, *args, **kwargs):
+        if "uid" in request.session:
+            return func(request, *args, **kwargs)
+        else:
+            return redirect("/")
+    return wrapper
 
+def index(request):
+    if "uid" in request.session:
+        return redirect("/notebooks/")
+    return render_to_response('index.html', context_instance=RequestContext(request))
+
+@authentication
 def notebooks(request):
-    uid = request.POST["uid"]
+    uid = request.session["uid"]
     notebooks = Notebook.objects(uid=ObjectId(uid))
     params = {"notebooks" : notebooks}
     return render_to_response('notebooks.html', params, context_instance=RequestContext(request))
+
+def login(request):
+    u = request.POST["name"]
+    p = request.POST["password"]
+
+    users = User.objects(name=u)
+
+    if users and len(users) == 1 and p == users[0].password:
+        request.session["uid"] = str(users[0].id)
+        request.session["uname"] = users[0].name
+        return redirect("/notebooks/")
+
+    return redirect("/")
 
