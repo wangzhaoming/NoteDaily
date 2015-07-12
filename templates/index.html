@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>NoteDaily</title>
+    <script src="http://libs.baidu.com/jquery/1.9.0/jquery.js"></script>
+</head>
+<body>
+{% for user in users %}
+    <a href="javascript:;" id="uname" uid="{{ user.id }}"> {{ user.name }} </a>
+{% endfor %}
+
+<form id="_form" action="/notebooks/" method="post">
+    {% csrf_token %}
+    <input type="hidden" name="uid" id="uid"/>
+</form>
+<script>
+    $(document).ready(function () {
+        $("#uname").click(function () {
+            $("#uid").val($(this).attr("uid"));
+            $("#_form").submit();
+        });
+    });
+</script>
+</body>
+</html>
