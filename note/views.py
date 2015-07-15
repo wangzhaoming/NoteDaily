@@ -38,5 +38,24 @@ def login(request):
         request.session["uname"] = users[0].name
         return redirect("/notebooks/")
 
+    params = {"LOGIN_ERR" : "Login failed!"}
+    return render_to_response('index.html', params, context_instance=RequestContext(request))
+
+def logout(request):
+    del request.session["uid"]
+    del request.session["uname"]
     return redirect("/")
 
+def register(request):
+    u = request.POST["name"]
+    p = request.POST["password"]
+    user = User(name=u, password=p)
+    try:
+        user.save()
+        user = User.objects(name=u).first()
+        request.session["uid"] = str(user.id)
+        request.session["uname"] = user.name
+        return redirect("/notebooks/")
+    except:
+        params = {"REGISTER_ERR" : "Username exists!"}
+        return render_to_response('index.html', params, context_instance=RequestContext(request))

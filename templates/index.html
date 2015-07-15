@@ -1,11 +1,55 @@
 {% extends "base.html" %}
 {% block content %}
-    <form action="/login/" method="post">
-        {% csrf_token %}
-        <div>Username: <input type="text" name="name"/></div>
-        <div>Password: <input type="password" name="password"/></div>
-        <div>
-            <button type="submit">Login</button>
-        </div>
-    </form>
+    <div>
+        <div>{{ LOGIN_ERR }}</div>
+        <form action="/login/" method="post">
+            {% csrf_token %}
+            <div>Username: <input type="text" name="name"/></div>
+            <div>Password: <input type="password" name="password"/></div>
+            <div>
+                <button type="submit">Login</button>
+            </div>
+        </form>
+    </div>
+    <div>
+        <div>{{ REGISTER_ERR }}</div>
+        <form id="formReg" action="/register/" method="post">
+            {% csrf_token %}
+            <div>Username: <input type="text" id="nameReg" name="name"/><span class="err" id="spanErrName"></span></div>
+            <div>Password: <input type="password" id="passReg" name="password"/><span class="err"
+                                                                                      id="spanErrPass"></span></div>
+            <div>Repassword: <input type="password" id="repassReg"/><span class="err" id="spanErrRepass"></span></div>
+            <div>
+                <button id="btnReg" type="button">Register</button>
+            </div>
+        </form>
+    </div>
+    <script>
+        $(document).ready(function () {
+            $("#btnReg").click(function () {
+                var valid = true;
+                $(".err").text("");
+
+                if ($("#nameReg").val() === "") {
+                    $("#spanErrName").text("Please input username");
+                    valid = false;
+                }
+                if ($("#passReg").val() === "") {
+                    $("#spanErrPass").text("Please input password");
+                    valid = false;
+                }
+                if ($("#repassReg").val() === "") {
+                    $("#spanErrRepass").text("Please input password again");
+                    valid = false;
+                }
+                if ($("#passReg").val() !== "" && $("#repassReg").val() !== "" && $("#passReg").val() !== $("#repassReg").val()) {
+                    $("#spanErrRepass").text("Please input the same password");
+                    valid = false;
+                }
+                if (valid) {
+                    $("#formReg").submit();
+                }
+            });
+        });
+    </script>
 {% endblock %}

@@ -12,6 +12,9 @@
         {% block sidebar %}
         <ul>
             <li><a href="/">Home</a></li>
+            {% if  request.session.uid %}
+                <li><a href="/logout">Logout</a></li>
+            {% endif %}
         </ul>
         {% endblock %}
     </div>
