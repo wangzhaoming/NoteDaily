@@ -1,15 +1,22 @@
 {% extends "base.html" %}
 {% block title %}Notebooks{% endblock %}
+{% block moreImport %}
+    <script src="/static/js/note.js"></script>
+{% endblock %}
 {% block content %}
-    <h2>Hello, {{ request.session.uname }}</h2>
-    
-    <div class="center">
-	    		<img src="/static/images/add_1.png"  width="36" height="36" >
-	 </div>
-     <div id="title">
-    {% for item in notebooks %}
-    	<div class="note"></div>
-        <h2> {{ item.name }} </h2>
-    {% endfor %}
-     </div>
+    <div id="notebookList" class="max-height">
+        <ul>
+            {% for item in notebooks %}
+                <li><a href="javascript:;" class="lnkNoteBook">{{ item.name }}</a></li>
+            {% endfor %}
+        </ul>
+    </div>
+    <div id="noteList" class="max-height">
+
+
+    </div>
+    <div id="noteContent" class="max-height">
+
+
+    </div>
 {% endblock %}

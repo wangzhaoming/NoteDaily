@@ -5,21 +5,26 @@
     <link rel="stylesheet" href="/static/css/style.css" />
     <title>{% block title %}NoteDaily{% endblock %}</title>
     <script src="http://libs.baidu.com/jquery/1.9.0/jquery.js"></script>
+    <script src="/static/js/tools.js"></script>
+    {% block moreImport %}{% endblock %}
 </head>
 
 <body>
-    <div id="sidebar">
-        {% block sidebar %}
+    <div id="navi">
+        {% block navi %}
         <ul>
             <li><a href="/">Home</a></li>
             {% if  request.session.uid %}
                 <li><a href="/logout">Logout</a></li>
             {% endif %}
         </ul>
+            {% if  request.session.uid %}
+                <h2>Hello, {{ request.session.uname }}</h2>
+            {% endif %}
         {% endblock %}
     </div>
 
-    <div id="content">
+    <div id="content" class="max-height">
         {% block content %}{% endblock %}
     </div>
 </body>

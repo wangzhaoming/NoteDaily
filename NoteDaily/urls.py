@@ -22,4 +22,6 @@ urlpatterns = [
     url(r'^login/$', 'note.views.login'),
     url(r'^logout/$', 'note.views.logout'),
     url(r'^register/$', 'note.views.register'),
+    url(r'^notes/$', 'note.views.notes'),
+    url(r'^note/$', 'note.views.note'),
 ]

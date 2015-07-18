@@ -59,3 +59,22 @@ def register(request):
     except:
         params = {"REGISTER_ERR" : "Username exists!"}
         return render_to_response('index.html', params, context_instance=RequestContext(request))
+
+@authentication
+def notes(request):#获取notebook下的所有note列表
+    uid = ObjectId(request.session["uid"])
+    notebookName = request.POST["noteBookName"]
+    notebook = Notebook.objects(Q(uid=uid) & Q(name=notebookName)).first()
+    bid = notebook.id
+
+    notes = Note.objects(bid=bid)
+    noteNames = [{"id" : item.id, "name" : item.name} for item in notes]
+
+    return render_to_response("notesList.html", {"noteNames" : noteNames})
+
+@authentication
+def note(request):#获取note内容
+    nid = request.POST["nid"]
+    note = Note.objects(id=nid).first()
+
+    return render_to_response("noteContent.html", {"noteContent" : note.content})

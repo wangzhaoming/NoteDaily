@@ -1,50 +1,32 @@
-body{
-    	margin:0;
-    	overflow: hidden;
-    	}
-    	ul{
-    	padding:0;
-	    margin:0;
-    	}
-	    li{
-	    list-style-type:none;
-	    }
-	    a{
-	    text-decoration:none;
-	    
-	    }
-	    .center{
-	    text-align: center;
-	    border-right:0;
-	    padding-top: 20px;
-	    }
-    	#home{
-    	background-image:url("/static/images/home.png");
-    	display: block;
-    	width: 36px;
-    	height: 36px;
-    	}
-    	div{
-    	padding: 0px;
-    	border-right:1px #c4c4c4 solid;
-    	}
-    	#content{
-    	float:left;
-    	background-color:#f8f8f8;
-    	width: 5%;
-    	height: 750px;
-    	}
-    	#title{
-    	float:left;
-    	font-family: caecilia,times,serif;
-	    font-size: 16px;
-	    font-weight: 400;
-	    width: 30%;
-	    height: 750px;
-    	}
-    	.note{
-    	padding-top:40px;
-    	border-right:0;
-    	border-bottom:1px #c4c4c4 solid;
-    	height: 40px;
-    	}
+#notebookList, #noteList {
+    float: left;
+    width: 200px;
+    border-right: solid black 1px;
+    overflow: hidden;
+}
+
+#noteContent {
+    float: left;
+    overflow: hidden;
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+#content {
+    position: absolute;
+    top: 100px;
+    margin: 0px;
+    overflow: hidden;
+}
+
+#navi {
+    height: 100px;
+    width: 100%;
+    margin: 0px;
+    overflow: hidden;
+}
