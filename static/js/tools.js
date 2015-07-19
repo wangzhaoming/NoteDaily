@@ -18,6 +18,20 @@ function getHtml(url, param, elementId, callback) {
     });
 }
 
+function fetchData(url, param, callback) {
+    $.ajax({
+        type: "POST",
+        async: "true",
+        url: url,
+        data: param,
+        success: function (data) {
+            if (callback instanceof Function) {
+                callback(data);
+            }
+        }
+    });
+}
+
 function getCookie(name) {
     var cookieValue = null;
     if (document.cookie && document.cookie != '') {

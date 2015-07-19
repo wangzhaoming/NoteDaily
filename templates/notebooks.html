@@ -2,6 +2,7 @@
 {% block title %}Notebooks{% endblock %}
 {% block moreImport %}
     <script src="/static/js/note.js"></script>
+    <script src="/static/ckeditor/ckeditor.js"></script>
 {% endblock %}
 {% block content %}
     <div id="notebookList" class="max-height">
@@ -16,7 +17,7 @@
 
     </div>
     <div id="noteContent" class="max-height">
-
+        <textarea id="editorArea" />
 
     </div>
 {% endblock %}

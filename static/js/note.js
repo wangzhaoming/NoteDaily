@@ -11,22 +11,32 @@ $(document).ready(function () {
             "noteList",
             function () {
                 $(".lnkNote").click(function () {
-                    getHtml("/note/",
+                    fetchData("/note/",
                         {
                             "nid": $(this).attr("nid")
                         },
-                        "noteContent"
+                        function (data) {
+                            CKEDITOR.instances.editorArea.setData(data);
+                        }
                     );
                 });
             }
         );
 
-        $("#noteContent").html("");
+        CKEDITOR.instances.editorArea.setData("");
     });
 
     $(".max-height").height($(window).height() - 130);
+    $("#noteContent").width($(window).width() - 450);
 
     $(window).resize(function () {
         $(".max-height").height($(window).height() - 130);
+        $("#noteContent").width($(window).width() - 450);
+        CKEDITOR.instances.editorArea.height = $(".max-height").height();
+    });
+
+    CKEDITOR.replace('editorArea', {
+        width: '100%',
+        height: $(".max-height").height()
     });
 });

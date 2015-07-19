@@ -110,5 +110,6 @@ STATICFILES_DIRS = (
     ("css", os.path.join(BASE_DIR,'static/css')),
     ("js", os.path.join(BASE_DIR,'static/js')),
     ("images", os.path.join(BASE_DIR,'static/images')),
-) 
+    ("ckeditor", os.path.join(BASE_DIR,'static/ckeditor')),
+)
 

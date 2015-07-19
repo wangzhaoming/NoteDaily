@@ -8,6 +8,8 @@
 #noteContent {
     float: left;
     overflow: hidden;
+    border: solid black 1px;
+    border-left: none;
 }
 
 html, body {
@@ -15,6 +17,7 @@ html, body {
     margin: 0;
     padding: 0;
     overflow: hidden;
+    background-color: #eeeeee;
 }
 
 #content {

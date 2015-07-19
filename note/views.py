@@ -77,4 +77,4 @@ def note(request):#»ñÈ¡noteÄÚÈİ
     nid = request.POST["nid"]
     note = Note.objects(id=nid).first()
 
-    return render_to_response("noteContent.html", {"noteContent" : note.content})
+    return HttpResponse(str(note.content))
