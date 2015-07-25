@@ -17,4 +17,4 @@ class Note(Document):
     id = ObjectIdField(db_field="_id")
     bid = ObjectIdField(required=True)
     name = StringField(required=True)
-    content = DynamicField()
+    content = StringField()

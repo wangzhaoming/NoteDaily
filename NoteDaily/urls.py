@@ -24,4 +24,7 @@ urlpatterns = [
     url(r'^register/$', 'note.views.register'),
     url(r'^notes/$', 'note.views.notes'),
     url(r'^note/$', 'note.views.note'),
+    url(r'^notebook/add/$', 'note.views.addNoteBook'),
+    url(r'^note/add/$', 'note.views.addNote'),
+    url(r'^note/save/$', 'note.views.saveNote'),
 ]

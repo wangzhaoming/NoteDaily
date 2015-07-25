@@ -31,8 +31,4 @@ CKEDITOR.editorConfig = function( config ) {
 
 	// Dialog windows are also simplified.
 	config.removeDialogTabs = 'link:advanced';
-
-	config.language = 'zh-cn';
-	config.width = '100%';
-	config.height = '100%';
 };

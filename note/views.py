@@ -52,8 +52,7 @@ def register(request):
     user = User(name=u, password=p)
     try:
         user.save()
-        user = User.objects(name=u).first()
-        request.session["uid"] = str(user.id)
+        request.session["uid"] = str(user.pk)
         request.session["uname"] = user.name
         return redirect("/notebooks/")
     except:
@@ -78,3 +77,40 @@ def note(request):#ªÒ»°noteƒ⁄»›
     note = Note.objects(id=nid).first()
 
     return HttpResponse(str(note.content))
+
+@authentication
+def addNoteBook(request):
+    name = request.POST["name"]
+    uid = ObjectId(request.session["uid"])
+    notebook = Notebook(name=name, uid=uid)
+    notebook.save()
+
+    return HttpResponse("0")
+
+@authentication
+def addNote(request):
+    name = request.POST["name"]
+    bname = request.POST["bname"]
+    uid = ObjectId(request.session["uid"])
+
+    notebook = Notebook.objects(Q(uid=uid) & Q(name=bname)).first()
+    bid = notebook.id
+
+    note = Note(name=name, bid=bid, content="")
+    note.save()
+
+    return HttpResponse("{\"status\":\"0\", \"nid\":\"" + str(note.pk) + "\"}", content_type="application/json")
+
+@authentication
+def saveNote(request):
+    content = request.POST["content"]
+    nid = ObjectId(request.POST["nid"])
+
+    notes = Note.objects(id=nid)
+
+    try:
+        notes.update(set__content=content)
+        return HttpResponse("0")
+    except:
+        return HttpResponse("1")
+

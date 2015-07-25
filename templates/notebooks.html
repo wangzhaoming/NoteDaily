@@ -4,9 +4,19 @@
     <script src="/static/js/note.js"></script>
     <script src="/static/ckeditor/ckeditor.js"></script>
 {% endblock %}
+{% block navi %}
+    <ul>
+        <li><a href="/">Home</a></li>
+        {% if  request.session.uid %}
+            <li><a href="/logout">Logout</a></li>
+        {% endif %}
+    </ul>
+    <button id="newNotebook">New NoteBook</button>
+    <button id="newNote">New Note</button>
+{% endblock %}
 {% block content %}
     <div id="notebookList" class="max-height">
-        <ul>
+        <ul id="notebookUl">
             {% for item in notebooks %}
                 <li><a href="javascript:;" class="lnkNoteBook">{{ item.name }}</a></li>
             {% endfor %}
@@ -17,7 +27,7 @@
 
     </div>
     <div id="noteContent" class="max-height">
-        <textarea id="editorArea" />
+        <textarea id="editorArea"/>
 
     </div>
 {% endblock %}
