@@ -13,7 +13,6 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
 from mongoengine import connect
-import mongoengine
 
 # Connect to mongodb
 connect('note', host='www.notech.work', port=20000)
@@ -41,6 +40,8 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'note',
+    'mod_wsgi.server',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -112,4 +113,3 @@ STATICFILES_DIRS = (
     ("images", os.path.join(BASE_DIR,'static/images')),
     ("ckeditor", os.path.join(BASE_DIR,'static/ckeditor')),
 )
-
